@@ -13,7 +13,7 @@ spec:
   {{- end }}
   containers:
     - name: grpc-health-probe
-      image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+      image: {{ include "permify.image" . | quote }}
       imagePullPolicy: {{ .Values.image.pullPolicy }}
       command: ["grpc_health_probe", '-addr={{ include "permify.fullname" . }}:{{ .Values.app.server.grpc.port }}']
   restartPolicy: Never
